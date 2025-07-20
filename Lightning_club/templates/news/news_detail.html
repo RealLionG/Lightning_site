@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ news.title }} - Компьютерный клуб "Молния"{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'news:list' %}">Новости</a></li>
+        <li class="breadcrumb-item active">{{ news.title|truncatewords:5 }}</li>
+    </ol>
+</nav>
+
+<article class="card shadow">
+    {% if news.image %}
+        <img src="{{ news.image.url }}" class="card-img-top" alt="{{ news.title }}" style="max-height: 400px; object-fit: cover;">
+    {% endif %}
+    
+    <div class="card-body">
+        <h1 class="card-title">{{ news.title }}</h1>
+        
+        <div class="text-muted mb-3">
+            <i class="fas fa-user"></i> {{ news.author.first_name|default:news.author.username }}
+            <i class="fas fa-calendar ms-3"></i> {{ news.created_at|date:"d F Y, H:i" }}
+            {% if news.updated_at != news.created_at %}
+                <i class="fas fa-edit ms-3"></i> Обновлено: {{ news.updated_at|date:"d.m.Y H:i" }}
+            {% endif %}
+        </div>
+        
+        <div class="card-text">
+            {{ news.content|linebreaks }}
+        </div>
+    </div>
+</article>
+
+<!-- Комментарии -->
+<div class="mt-5">
+    <h3><i class="fas fa-comments"></i> Комментарии ({{ comments.count }})</h3>
+    
+    {% if user.is_authenticated %}
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Добавить комментарий</h5>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ comment_form.content }}
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Отправить
+                    </button>
+                </form>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle"></i> 
+            Для добавления комментариев необходимо 
+            <a href="{% url 'users:login' %}" class="alert-link">войти в систему</a>.
+        </div>
+    {% endif %}
+    
+    {% if comments %}
+        {% for comment in comments %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="card-title mb-0">
+                            <i class="fas fa-user-circle"></i> 
+                            {{ comment.author.first_name|default:comment.author.username }}
+                        </h6>
+                        <small class="text-muted">
+                            <i class="fas fa-clock"></i> {{ comment.created_at|date:"d.m.Y H:i" }}
+                        </small>
+                    </div>
+                    <p class="card-text">{{ comment.content|linebreaks }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-secondary text-center">
+            <i class="fas fa-comment-slash"></i> Комментариев пока нет. Будьте первым!
+        </div>
+    {% endif %}
+</div>
+
+<div class="mt-4">
+    <a href="{% url 'news:list' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Вернуться к новостям
+    </a>
+</div>
+{% endblock %}

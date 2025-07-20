@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - Компьютерный клуб "Молния"{% endblock %}
+
+{% block content %}
+<div class="hero-section bg-gradient-primary text-white p-5 rounded mb-5">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h1 class="display-4"><i class="fas fa-bolt"></i> Компьютерный клуб "Молния"</h1>
+            <p class="lead">Современные игровые компьютеры, высокоскоростной интернет и уютная атмосфера для геймеров всех уровней!</p>
+            <a href="{% url 'contacts' %}" class="btn btn-light btn-lg">
+                <i class="fas fa-info-circle"></i> Узнать больше
+            </a>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-desktop display-1 text-white-50"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <h2><i class="fas fa-newspaper"></i> Последние новости</h2>
+        {% if latest_news %}
+            {% for news in latest_news %}
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        {% if news.image %}
+                            <div class="col-md-4">
+                                <img src="{{ news.image.url }}" class="img-fluid rounded-start h-100 object-fit-cover" alt="{{ news.title }}">
+                            </div>
+                        {% endif %}
+                        <div class="col-md-{% if news.image %}8{% else %}12{% endif %}">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a href="{{ news.get_absolute_url }}" class="text-decoration-none">{{ news.title }}</a>
+                                </h5>
+                                <p class="card-text">{{ news.content|truncatewords:30 }}</p>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-user"></i> {{ news.author.first_name|default:news.author.username }}
+                                        <i class="fas fa-calendar ms-2"></i> {{ news.created_at|date:"d.m.Y H:i" }}
+                                    </small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="text-center">
+                <a href="{% url 'news:list' %}" class="btn btn-primary">
+                    <i class="fas fa-list"></i> Все новости
+                </a>
+            </div>
+        {% else %}
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i> Новостей пока нет.
+            </div>
+        {% endif %}
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-gamepad"></i> Наши услуги</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success"></i> Игровые компьютеры</li>
+                    <li><i class="fas fa-check text-success"></i> Высокоскоростной интернет</li>
+                    <li><i class="fas fa-check text-success"></i> Турниры и соревнования</li>
+                    <li><i class="fas fa-check text-success"></i> Обучение игровым навыкам</li>
+                    <li><i class="fas fa-check text-success"></i> Комфортная зона отдыха</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-success text-white">
+                <h5><i class="fas fa-clock"></i> Режим работы</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Понедельник - Пятница:</strong><br>10:00 - 00:00</p>
+                <p><strong>Суббота - Воскресенье:</strong><br>10:00 - 02:00</p>
+                <p class="text-success"><i class="fas fa-phone"></i> +7 (123) 456-78-90</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

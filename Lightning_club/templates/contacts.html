@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% block title %}Контакты - Компьютерный клуб "Молния"{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <h1><i class="fas fa-address-card"></i> Контакты</h1>
+        
+        <div class="card">
+            <div class="card-body">
+                <h3>Компьютерный клуб "Молния"</h3>
+                <p class="lead">Современный компьютерный клуб с лучшим игровым оборудованием в городе!</p>
+                
+                <h4>О нас</h4>
+                <p>
+                    Клуб "Молния" работает с 2018 года и за это время стал любимым местом для геймеров всех возрастов. 
+                    У нас вы найдете современные игровые компьютеры с топовыми характеристиками, высокоскоростной 
+                    интернет и уютную атмосферу для комфортной игры.
+                </p>
+                
+                <h4>Наши преимущества</h4>
+                <ul>
+                    <li>Игровые компьютеры последнего поколения</li>
+                    <li>Профессиональные игровые кресла и периферия</li>
+                    <li>Высокоскоростной интернет (1 Гбит/с)</li>
+                    <li>Большой выбор популярных игр</li>
+                    <li>Регулярные турниры и соревнования</li>
+                    <li>Система скидок для постоянных клиентов</li>
+                    <li>Дружелюбная и профессиональная поддержка</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5><i class="fas fa-map-marker-alt"></i> Контактная информация</h5>
+            </div>
+            <div class="card-body">
+                <p><i class="fas fa-map-marker-alt text-danger"></i> <strong>Адрес:</strong><br>
+                г. Москва, ул. Геймерская, 42<br>
+                (рядом с метро "Технопарк")</p>
+                
+                <p><i class="fas fa-phone text-success"></i> <strong>Телефон:</strong><br>
+                +7 (123) 456-78-90</p>
+                
+                <p><i class="fas fa-envelope text-info"></i> <strong>Email:</strong><br>
+                info@lightning-club.ru</p>
+                
+                <p><i class="fas fa-globe text-warning"></i> <strong>Сайт:</strong><br>
+                www.lightning-club.ru</p>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-success text-white">
+                <h5><i class="fas fa-clock"></i> Режим работы</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm">
+                    <tr><td>Понедельник</td><td>10:00 - 00:00</td></tr>
+                    <tr><td>Вторник</td><td>10:00 - 00:00</td></tr>
+                    <tr><td>Среда</td><td>10:00 - 00:00</td></tr>
+                    <tr><td>Четверг</td><td>10:00 - 00:00</td></tr>
+                    <tr><td>Пятница</td><td>10:00 - 00:00</td></tr>
+                    <tr class="table-warning"><td>Суббота</td><td>10:00 - 02:00</td></tr>
+                    <tr class="table-warning"><td>Воскресенье</td><td>10:00 - 02:00</td></tr>
+                </table>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header bg-info text-white">
+                <h5><i class="fas fa-ruble-sign"></i> Стоимость</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>1 час:</strong> 100 руб.</li>
+                    <li><strong>3 часа:</strong> 250 руб.</li>
+                    <li><strong>5 часов:</strong> 400 руб.</li>
+                    <li><strong>Ночной тариф:</strong> 80 руб/час</li>
+                    <li class="text-success"><strong>Абонемент месяц:</strong> 2500 руб.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
